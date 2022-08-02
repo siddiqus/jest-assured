@@ -1,0 +1,43 @@
+{
+  "name": "jest-assured",
+  "version": "1.0.0",
+  "description": "A Backend API and System Integration Testing Framework",
+  "scripts": {
+    "prepare": "husky install",
+    "build": "tsc",
+    "test": "jest",
+    "posttest": "echo Report Link: $INIT_CWD/reports/jest-stare/index.html",
+    "autoapi": "jest autoapi",
+    "lintfix": "eslint src/**/* --fix",
+    "lint": "eslint src/**/*"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "0.27.2",
+    "axios-retry": "3.3.1",
+    "dotenv": "16.0.1",
+    "eslint": "7.32.0",
+    "eslint-config-airbnb-base": "14.2.1",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-import": "2.24.1",
+    "eslint-plugin-jest": "24.4.0",
+    "eslint-plugin-prettier": "3.4.1",
+    "husky": "8.0.1",
+    "jest": "28.0.0",
+    "mysql2": "^2.3.3",
+    "pg": "^8.7.3",
+    "sequelize": "6.21.3",
+    "typescript": "4.7.4"
+  },
+  "devDependencies": {
+    "@types/jest": "28.1.6",
+    "@types/node": "18.6.3",
+    "@typescript-eslint/eslint-plugin": "5.32.0",
+    "@typescript-eslint/parser": "5.32.0",
+    "jest-stare": "2.4.1",
+    "prettier": "2.7.1",
+    "ts-jest": "28.0.0",
+    "ts-node": "10.9.1"
+  }
+}
