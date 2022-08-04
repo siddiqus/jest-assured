@@ -1,0 +1,14 @@
+[
+  {
+    "description": "should return healthcheck response",
+    "api": "jsonplaceholder",
+    "url": "/todos/1",
+    "responseStatus": 200,
+    "responseBody": {
+      "userId": 1,
+      "id": 1,
+      "title": "delectus aut autem",
+      "completed": false
+    }
+  }
+]

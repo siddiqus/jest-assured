@@ -1,45 +1,45 @@
-import fs from 'fs';
-import path from 'path';
+import fs from 'fs'
+import path from 'path'
 
 function readApiUsageFile() {
-  const usageFilePath = path.join(__dirname, 'reports', 'api-usage.txt');
+  const usageFilePath = path.join(__dirname, 'reports', 'api-usage.txt')
 
   if (!fs.existsSync(usageFilePath)) {
-    return;
+    return
   }
   const fileContents = fs
     .readFileSync(usageFilePath)
     .toString()
     .split('\n')
-    .filter(Boolean);
+    .filter(Boolean)
 
   const usageMap = fileContents.reduce((usgMap, apiCall) => {
-    const [service, method, url] = apiCall.split(' ');
-    const apiurl = `${method} ${url}`;
+    const [service, method, url] = apiCall.split(' ')
+    const apiurl = `${method} ${url}`
 
-    const newMap: any = { ...usgMap };
-    newMap[service] = newMap[service] || {};
+    const newMap: any = { ...usgMap }
+    newMap[service] = newMap[service] || {}
     newMap[service][apiurl] = newMap[service][apiurl]
       ? newMap[service][apiurl] + 1
-      : 1;
-    return newMap;
-  }, {});
+      : 1
+    return newMap
+  }, {})
 
   fs.writeFileSync(
     path.join(__dirname, 'reports', 'api-usage.json'),
     JSON.stringify(usageMap, null, 2)
-  );
-  fs.unlinkSync(usageFilePath);
+  )
+  fs.unlinkSync(usageFilePath)
 }
 
 const teardown = async () => {
   try {
-    readApiUsageFile();
+    readApiUsageFile()
   } catch (error) {
-    console.error(error);
+    console.error(error)
   }
-};
+}
 
 module.exports = () => {
-  teardown();
-};
+  teardown()
+}

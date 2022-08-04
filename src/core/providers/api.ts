@@ -75,18 +75,18 @@ export function testApi(opts: {
   description: string
   api: keyof typeof apiConfigs
   url: string
-  responseData: Record<string, any>
-  request: any
+  responseBody: Record<string, any>
   responseStatus: number
+  requestBody?: Record<string, any>
   method?: 'get' | 'put' | 'patch' | 'post' | 'delete'
 }) {
   const {
     description,
     api,
     url,
-    request,
-    responseData,
     responseStatus,
+    responseBody,
+    requestBody = {},
     method = 'get',
   } = opts
   it(description, async () => {
@@ -95,20 +95,20 @@ export function testApi(opts: {
       throw new Error('Client is not configured')
     }
 
-    if (responseStatus === 200) {
-      const res = await client[method](url, request)
+    if (responseStatus >= 200 && responseStatus < 300) {
+      const res = await client[method](url, requestBody)
       const { data } = res
-      expect(data).toEqual(responseData)
+      expect(data).toEqual(responseBody)
     } else {
       let responseError
       try {
-        await client[method](url, request)
+        await client[method](url, requestBody)
       } catch (error) {
         responseError = error
       }
 
       expect(responseError).toBeDefined()
-      expect((responseError as AxiosError).response?.data).toEqual(responseData)
+      expect((responseError as AxiosError).response?.data).toEqual(responseBody)
     }
   })
 }

@@ -9,5 +9,7 @@ module.exports = {
   ],
   rules: {
     '@typescript-eslint/no-var-requires': 0,
-  }
+    'unused-imports/no-unused-imports': 'error',
+  },
+  plugins: ['unused-imports'],
 }
