@@ -4,7 +4,9 @@ import { testApi } from './providers/api'
 
 const autoApiFolderPath = path.join(__dirname, '..', 'autoapi')
 
-const suiteNames = fs.readdirSync(autoApiFolderPath)
+const suiteNames = fs.existsSync(autoApiFolderPath)
+  ? fs.readdirSync(autoApiFolderPath)
+  : []
 
 const configErrors: {
   suiteName: string
@@ -14,7 +16,7 @@ const configErrors: {
 
 const testSuites = suiteNames.map((suiteName) => {
   const suitePath = path.join(autoApiFolderPath, suiteName)
-  const configFiles = fs.readdirSync(suitePath)
+  const configFiles = fs.existsSync(suitePath) ? fs.readdirSync(suitePath) : []
 
   const testConfigs = configFiles.map((configFile) => {
     const testCasesPath = path.join(suitePath, configFile)
@@ -54,6 +56,10 @@ if (configErrors.length > 0) {
     console.error(`${er.suiteName}/${er.configFile}: ${er.error}`)
   })
 }
+
+it('Auto: should compile autoapi', () => {
+  expect(Array.isArray(testSuites)).toBeTruthy()
+})
 
 testSuites.forEach((testSuite: any) => {
   describe(`Auto: ${testSuite.suiteName}`, () => {

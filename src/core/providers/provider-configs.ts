@@ -1,8 +1,9 @@
-import { apiProviders, dbProviders } from '../../../provider.declaration'
+import configs from '../../../.jest-assured.config'
+
 import { ApiConfigsMap, DbConfigsMap } from '../types'
 
-export const apiConfigs: ApiConfigsMap = apiProviders.reduce(
-  (obj: ApiConfigsMap, apiName) => {
+export const apiConfigs: ApiConfigsMap = (configs.providers.api || []).reduce(
+  (obj: ApiConfigsMap, apiName: string) => {
     const apiHeadersStr = process.env[`${apiName}_API_HEADERS_JSON`] || '{}'
     let apiHeadersJson: Record<string, any>
     try {
@@ -19,7 +20,7 @@ export const apiConfigs: ApiConfigsMap = apiProviders.reduce(
   {} as ApiConfigsMap
 )
 
-export const dbConfigs: DbConfigsMap = dbProviders.reduce(
+export const dbConfigs: DbConfigsMap = (configs.providers.db || []).reduce(
   (obj: any, ms: any) => {
     obj[ms] = {
       dialect: process.env[`${ms}_DATABASE_DIALECT`] as string,

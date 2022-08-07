@@ -1,5 +1,5 @@
 import { QueryOptions } from 'sequelize'
-import { apiProviders, dbProviders } from '../../provider.declaration'
+import config from '../../.jest-assured.config'
 
 export interface DbConfig {
   dialect: 'postgres' | 'mysql'
@@ -10,14 +10,17 @@ export interface DbConfig {
   password: string
 }
 
-export type DbConfigsMap = Record<typeof dbProviders[number], DbConfig>
+export type DbConfigsMap = Record<typeof config.providers.db[number], DbConfig>
 
 export interface ApiConfig {
   baseUrl: string
   headers: Record<string, any>
 }
 
-export type ApiConfigsMap = Record<typeof apiProviders[number], ApiConfig>
+export type ApiConfigsMap = Record<
+  typeof config.providers.api[number],
+  ApiConfig
+>
 
 export interface DbClient {
   selectAll: (sqlQuery: string, options?: QueryOptions) => Promise<any[]>
