@@ -1,6 +1,6 @@
 import configs from '../../../.jest-assured.config'
 
-import { ApiConfigsMap, DbConfigsMap } from '../types'
+import { ApiConfigsMap, ApiProviders, DbConfigsMap } from '../types'
 
 export const apiConfigs: ApiConfigsMap = (configs.providers.api || []).reduce(
   (obj: ApiConfigsMap, apiName: string) => {
@@ -11,7 +11,7 @@ export const apiConfigs: ApiConfigsMap = (configs.providers.api || []).reduce(
     } catch (error) {
       throw new Error(`Could not parse api header json for ${apiName}`)
     }
-    obj[apiName] = {
+    obj[apiName as ApiProviders] = {
       baseUrl: process.env[`${apiName}_API_BASE_URL`] as string,
       headers: apiHeadersJson,
     }

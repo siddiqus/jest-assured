@@ -3,4 +3,4 @@ export default {
     api: ['jsonplaceholder'],
     db: [],
   }
-}
+} as const

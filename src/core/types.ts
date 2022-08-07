@@ -10,17 +10,18 @@ export interface DbConfig {
   password: string
 }
 
-export type DbConfigsMap = Record<typeof config.providers.db[number], DbConfig>
-
 export interface ApiConfig {
   baseUrl: string
   headers: Record<string, any>
 }
 
-export type ApiConfigsMap = Record<
-  typeof config.providers.api[number],
-  ApiConfig
->
+export type ApiProviders = typeof config.providers.api[number]
+
+export type DbProviders = typeof config.providers.db[number]
+
+export type DbConfigsMap = Record<DbProviders, DbConfig>
+
+export type ApiConfigsMap = Record<ApiProviders, ApiConfig>
 
 export interface DbClient {
   selectAll: (sqlQuery: string, options?: QueryOptions) => Promise<any[]>
