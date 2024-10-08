@@ -1,7 +1,6 @@
 [
   {
     "description": "should return healthcheck response",
-    "api": "jsonplaceholder",
     "url": "/todos/1",
     "responseStatus": 200,
     "responseBody": {

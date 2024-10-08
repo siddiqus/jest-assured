@@ -39,6 +39,7 @@ const testSuites = suiteNames.map((suiteName) => {
     }
 
     return {
+      suiteName,
       fileName: configFile,
       testCases,
     }
@@ -61,14 +62,13 @@ it('Auto: should compile autoapi', () => {
   expect(Array.isArray(testSuites)).toBeTruthy()
 })
 
-testSuites.forEach((testSuite: any) => {
+testSuites.forEach((testSuite) => {
   describe(`Auto: ${testSuite.suiteName}`, () => {
     for (const { fileName, testCases } of testSuite.testConfigs) {
       describe(fileName, () => {
         for (const testCase of testCases) {
           const {
             description,
-            api,
             url,
             responseStatus,
             responseBody,
@@ -78,7 +78,7 @@ testSuites.forEach((testSuite: any) => {
 
           testApi({
             description,
-            api,
+            api: testSuite.suiteName as any,
             url,
             responseBody,
             requestBody,

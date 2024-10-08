@@ -119,6 +119,7 @@ export default {
         reportSummary: true,
         disableCharts: true,
         hidePassing: true,
+        coverageLink: '../../reports/coverage.html',
       },
     ],
   ],
