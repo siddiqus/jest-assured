@@ -1,7 +1,7 @@
 {
   "name": "jest-assured",
   "version": "1.0.0",
-  "description": "A Backend API and System Integration Testing Framework",
+  "description": "A batteries-included TypeScript-first E2E test framework.",
   "scripts": {
     "prepare": "husky install",
     "build": "tsc",
